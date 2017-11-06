@@ -24,11 +24,13 @@
   </nav>
   <div class="container">
     <h1>Latest Notes</h1>
-    <ul class="collection">
-      {{#each notes}} 
-        {{> note}} 
-      {{/each}}
-    </ul>
+    {{#if currentUser}}
+      <ul class="collection">
+        {{#each notes}} 
+          {{> note}} 
+        {{/each}}
+      </ul>
+    {{/if}}
   </div>
   {{> add}}
   <script>
@@ -41,7 +43,7 @@
 
 <template name="note">
   <li class="collection-item">
-    {{text}}:<strong>Added by {{userName}}</strong>
+    {{text}}: <strong>Added by {{username}}</strong>
     <a href="#" class="delete-note secondary-content">
       <i class="material-icons">close</i>
     </a>

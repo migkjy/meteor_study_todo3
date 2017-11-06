@@ -25,13 +25,24 @@ Template.add.events({
     const text = target.text.value;
 
     // insert note into collection
-    Notes.insert({
-      text,
-      createAt: new Date(),
-      owner: Meteor.userId(),
-      userName: Meteor.user().username,
-    });
+    /*     Notes.insert({
+          text,
+          createAt: new Date(),
+          owner: Meteor.userId(),
+          username: Meteor.user().username,
+        });
+     */
+    Meteor.call('notes.insert', text);
+    target.text.value = '';
+    $('#addModal').modal('close');
+    return false;
   },
 });
 
-Template.note.e
+Template.note.events({
+  'click .delete-note': function () {
+    // Notes.remove(this._id);
+    Meteor.call('notes.remove', this);
+    return false;
+  },
+});
